@@ -55,24 +55,32 @@ def find_new_place():
 
 
 temp_map = np.zeros((world, world), dtype='int')
-for r in range(0, world_map.shape[0]):
-	for c in range(0, world_map.shape[1]):
+for r in range(0, world_map.shape[0]-1)
+	for c in range(0, world_map.shape[1]-1):
 		temp_map[r][c] = check_local_area([world_map[r][c+1], world_map[r+1][c+1], world_map[r+1][c], world_map[r+1,c-1], world_map[r][c-1], world_map[r-1][c-1], world_map[r-1][c], world_map[r-1][c+1]])['population_first_ratio']
-#		if world_map[r][c] == 1:
-#			if check_local_area([world_map[r][c+1], world_map[r+1][c+1], world_map[r+1][c],
-#			     world_map[r+1,c-1], world_map[r][c-1], world_map[r-1][c-1],
-#			        world_map[r-1][c], world_map[r-1][c+1]])['population_first_ratio'] < threshold:
-#				rn, cn = find_new_place()
-#				neutral_space.remove([rn, cn])
-#				neutral_space.append([r, c])
-#				new_world[rn][cn] = 1
-#		if world_map[r][c] == -1:
-#			if check_local_area([world_map[r][c+1], world_map[r+1][c+1], world_map[r+1][c],world_map[r+1,c-1], world_map[r][c-1], world_map[r-1][c-1],world_map[r-1][c], world_map[r-1][c+1]])['population_second_ratio'] < threshold:
-#				rn, cn = find_new_place()
-#				neutral_space.remove([rn, cn])
-#				neutral_space.append([r, c])
-#				new_world[rn][cn] = -1
-#				
+		if world_map[r][c] == 1:
+			if check_local_area([world_map[r][c+1], world_map[r+1][c+1], world_map[r+1][c],
+			     world_map[r+1,c-1], world_map[r][c-1], world_map[r-1][c-1],
+			        world_map[r-1][c], world_map[r-1][c+1]])['population_first_ratio'] < threshold:
+				rn, cn = find_new_place()
+				neutral_space.remove([rn, cn])
+				neutral_space.append([r, c])
+				new_world[rn][cn] = 1
+		if world_map[r][c] == -1:
+			if check_local_area([world_map[r][c+1], 
+							world_map[r+1][c+1], 
+							world_map[r+1][c],
+							world_map[r+1,c-1], 
+							world_map[r][c-1], 
+							world_map[r-1][c-1],
+							world_map[r-1][c], 
+							world_map[r-1][c+1]])['population_second_ratio'] < threshold:
+				rn, cn = find_new_place()
+				neutral_space.remove([rn, cn])
+				neutral_space.append([r, c])
+				new_world[rn][cn] = -1
+
+
 world_map == new_world
 			
 
